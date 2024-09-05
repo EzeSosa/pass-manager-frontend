@@ -35,12 +35,12 @@ function Home() {
         }
     }
 
-    const handleRemove = (id: number) => {
-        console.log(`Hello ${id}`)
+    const handleUpdate = (id: string, name: string) => {
+        console.log(`Hello ${id} ${name}`)
     }
 
-    const handleUpdate = (id: number, name: string) => {
-        console.log(`Hello ${id} ${name}`)
+    const handleDelete = (id: string) => {
+        console.log(`Hello ${id}`)
     }
 
     return (
@@ -61,7 +61,7 @@ function Home() {
                                 name={password.name}
                                 password={password.password}
                                 onUpdate={handleUpdate}
-                                onDelete={handleRemove}
+                                onDelete={handleDelete}
                             />
                         ))}
                     </tbody>

@@ -2,8 +2,8 @@ import React from 'react'
 import { Password as PasswordType } from './Password'
 
 interface Props extends PasswordType {
-    onUpdate: (id: number, name: string) => void,
-    onDelete: (id: number) => void
+    onUpdate: (id: string, name: string) => void,
+    onDelete: (id: string) => void
 }
 
 export const Password : React.FC<Props> = ({ id, name, password, onUpdate, onDelete }) => {

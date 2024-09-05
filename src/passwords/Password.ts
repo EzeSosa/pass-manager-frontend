@@ -1,5 +1,5 @@
 export type Password = {
-    id: number,
+    id: string,
     name: string,
     password: string
 }
