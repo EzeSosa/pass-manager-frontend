@@ -6,15 +6,34 @@ import client from '../lib/api/ApiClient.ts'
 
 function Home() {
     const [passwords, setPasswords] = useState([])
+    const [pageNumber, setPageNumber] = useState(0)
+    const [totalPages, setTotalPages] = useState(1)
+
     const userId = localStorage.getItem('userId')
 
     useEffect(() => {
         const loadPasswords = async () => {
-            const result = await client.get(`/api/v1/users/${userId}/passwords`)
+            const result = await client.get(
+                `/api/v1/users/${userId}/passwords`, 
+                { params: {pageNumber: pageNumber, pageSize: 5} } 
+            )
             setPasswords(result.data.content)
+            setTotalPages(result.data.totalPages)
         }
         loadPasswords()
-    }, [userId])
+    }, [userId, pageNumber])
+
+    const handleNextPage = () => {
+        if (pageNumber < totalPages - 1) {
+            setPageNumber(pageNumber + 1)
+        }
+    }
+
+    const handlePreviousPage = () => {
+        if (pageNumber > 0) {
+            setPageNumber(pageNumber - 1)
+        }
+    }
 
     const handleRemove = (id: number) => {
         console.log(`Hello ${id}`)
@@ -47,6 +66,10 @@ function Home() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="pagination-buttons">
+                <button className='btn mx-2 btn-page' onClick={handlePreviousPage} disabled={pageNumber === 0}>{'<<'}</button>
+                <button className='btn mx-2 btn-page' onClick={handleNextPage} disabled={pageNumber >= totalPages - 1}>{'>>'}</button>
             </div>
         </div>
     )
