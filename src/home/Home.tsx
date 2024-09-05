@@ -1,35 +1,39 @@
 import './Home.css'
 import { Password } from '../passwords/Password.tsx'
 import { Password as PasswordType } from '../passwords/Password.ts'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import client from '../lib/api/ApiClient.ts'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
     const [passwords, setPasswords] = useState<PasswordType[]>([])
     const [pageNumber, setPageNumber] = useState(0)
     const [totalPages, setTotalPages] = useState(1)
+    const navigate = useNavigate()
 
     const userId = localStorage.getItem('userId')
 
-    useEffect(() => {
-        const loadPasswords = async () => {
-            const result = await client.get(
-                `/api/v1/users/${userId}/passwords`, 
-                { params: {pageNumber: pageNumber, pageSize: 5} } 
-            )
-            setPasswords(result.data.content)
-            setTotalPages(result.data.totalPages)
-        }
-        loadPasswords()
-    }, [userId, passwords, pageNumber])
+    const loadPasswords =  useCallback(async () => {
+        const result = await client.get(
+            `/api/v1/users/${userId}/passwords`, 
+            { params: {pageNumber: pageNumber, pageSize: 5} } 
+        )
+        setPasswords(result.data.content)
+        setTotalPages(result.data.totalPages)
+    }, [userId, pageNumber])
 
-    const handleUpdate = (id: string, name: string) => {
-        console.log(`Hello ${id} ${name}`)
+    useEffect(() => {
+        loadPasswords()
+    }, [userId, pageNumber, loadPasswords])
+
+    const handleUpdate = (id: string) => {
+        navigate(`/updatepassword/${id}`)
     }
 
     const handleDelete = async (id: string) => {
         await client.delete(`/api/v1/passwords/${id}`)
         setPasswords(passwords.filter(password => password.id != id))
+        loadPasswords()
     }
 
     const handleNextPage = () => {
