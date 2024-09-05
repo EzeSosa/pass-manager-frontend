@@ -1,15 +1,13 @@
 .navbar {
     background-color: #343a40;
-    padding: 10px 20px;
     position: fixed;
     width: 100%;
     top: 0;
-    left: 0;
 }
 
 .navbar-brand {
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     text-decoration: none;
 }
 
@@ -42,5 +40,4 @@
     height: 40px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
 }

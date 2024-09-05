@@ -16,13 +16,16 @@
 .table th,
 .table td {
     text-align: center;
-    padding: 15px;
+    width: 200px;
+    padding: 15px 50px;
 }
 
 .btn-update {
     background-color: #007bff;
     color: #ffffff;
     border: none;
+    border-radius: 5px;
+    margin: 0px 2px;
 }
 
 .btn-update:hover {
@@ -33,6 +36,8 @@
     background-color: #dc3545;
     color: #ffffff;
     border: none;
+    border-radius: 5px;
+    margin: 0px 2px;
 }
 
 .btn-delete:hover {
