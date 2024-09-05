@@ -1,42 +1,27 @@
 import './Home.css'
 import { Password } from '../passwords/Password.tsx'
-import { useState } from 'react'
+import { Password as PasswordType } from '../passwords/Password.ts'
+import { useEffect, useState } from 'react'
+import client from '../lib/api/ApiClient.ts'
 
 function Home() {
-    const [passwords, setPasswords] = useState([
-        {
-            id: 1,
-            name: 'Twitter',
-            password: 'xMK89AS=cjkas/LJka9'
-        },
-        {
-            id: 2,
-            name: 'Facebook',
-            password: 'as89S=asckakas/LJka9'
-        },
-        {
-            id: 3,
-            name: 'Instagram',
-            password: 'o9SZuS=cjkas/LJk12s'
+    const [passwords, setPasswords] = useState([])
+    const userId = localStorage.getItem('userId')
+
+    useEffect(() => {
+        const loadPasswords = async () => {
+            const result = await client.get(`/api/v1/users/${userId}/passwords`)
+            setPasswords(result.data.content)
         }
-    ])
+        loadPasswords()
+    }, [userId])
 
     const handleRemove = (id: number) => {
-        const newPasswords = passwords.filter(password => password.id != id)
-        setPasswords(newPasswords)
+        console.log(`Hello ${id}`)
     }
 
     const handleUpdate = (id: number, name: string) => {
-        const newPasswords = passwords.map(password => {
-            if (password.id === id) {
-                return {
-                    ...password,
-                    name: name
-                }
-            }
-            return password
-        })
-        setPasswords(newPasswords)
+        console.log(`Hello ${id} ${name}`)
     }
 
     return (
@@ -51,7 +36,7 @@ function Home() {
                         </tr>
                     </thead>
                     <tbody>
-                        {passwords.map((password) => (
+                        {passwords.map((password: PasswordType) => (
                             <Password 
                                 id={password.id}
                                 name={password.name}
