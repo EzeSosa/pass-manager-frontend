@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import client from '../lib/api/ApiClient.ts'
 
 function Home() {
-    const [passwords, setPasswords] = useState([])
+    const [passwords, setPasswords] = useState<PasswordType[]>([])
     const [pageNumber, setPageNumber] = useState(0)
     const [totalPages, setTotalPages] = useState(1)
 
@@ -21,7 +21,16 @@ function Home() {
             setTotalPages(result.data.totalPages)
         }
         loadPasswords()
-    }, [userId, pageNumber])
+    }, [userId, passwords, pageNumber])
+
+    const handleUpdate = (id: string, name: string) => {
+        console.log(`Hello ${id} ${name}`)
+    }
+
+    const handleDelete = async (id: string) => {
+        await client.delete(`/api/v1/passwords/${id}`)
+        setPasswords(passwords.filter(password => password.id != id))
+    }
 
     const handleNextPage = () => {
         if (pageNumber < totalPages - 1) {
@@ -33,14 +42,6 @@ function Home() {
         if (pageNumber > 0) {
             setPageNumber(pageNumber - 1)
         }
-    }
-
-    const handleUpdate = (id: string, name: string) => {
-        console.log(`Hello ${id} ${name}`)
-    }
-
-    const handleDelete = (id: string) => {
-        console.log(`Hello ${id}`)
     }
 
     return (
