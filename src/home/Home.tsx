@@ -52,6 +52,7 @@ function Home() {
     const handleLogout = () => {
         localStorage.removeItem('userId')
         localStorage.removeItem('accessToken')
+        navigate("/login")
     }
 
     return (
