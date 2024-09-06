@@ -24,7 +24,7 @@ function UpdatePassword () {
     const handleUpdate = async (event: React.FormEvent) => {
         event.preventDefault()
         await client.patch(`/api/v1/passwords/${id}`, { name })
-        navigate('/')
+        navigate('/home')
     }
 
     return (

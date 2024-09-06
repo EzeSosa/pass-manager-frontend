@@ -16,7 +16,7 @@ function GeneratePassword() {
     const handleSave = async (event: React.FormEvent) => {
         event.preventDefault()
         await client.post(`/api/v1/passwords`, { name, userId })
-        navigate('/')
+        navigate('/home')
     }
 
     return (
