@@ -16,8 +16,48 @@
 .table th,
 .table td {
     text-align: center;
-    width: 200px;
+    width: 250px;
     padding: 15px 50px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.str-username {
+    margin-right: auto;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+.btn-new-password {
+    background-color: #7bce75;
+    font-size: 15px;
+    padding: 5px 10px;
+    color: #000000;
+    border: black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-new-password:hover {
+    background-color: #5b9856;
+}
+
+.btn-logout {
+    background-color: #c38163;
+    font-size: 15px;
+    padding: 5px 10px;
+    color: #000000;
+    border: black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-logout:hover {
+    background-color: #a66e55;
 }
 
 .btn-update {

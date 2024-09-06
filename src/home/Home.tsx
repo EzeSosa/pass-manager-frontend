@@ -12,6 +12,7 @@ function Home() {
     const navigate = useNavigate()
 
     const userId = localStorage.getItem('userId')
+    const username = localStorage.getItem('username')
 
     const loadPasswords =  useCallback(async () => {
         const result = await client.get(
@@ -48,9 +49,18 @@ function Home() {
         }
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('accessToken')
+    }
+
     return (
         <div className='container'>
-            <button className='btn-new-password' onClick={() => navigate("/savepassword")}>Generate Password</button>
+            <div className='button-container'>
+                <strong className='str-username'>¡Hello, {username}!</strong>
+                <button className='btn-new-password' onClick={() => navigate("/savepassword")}>Generate Password</button>
+                <button className='btn-logout' onClick={handleLogout}>Logout</button>
+            </div>
             <div className='table-container'>
                 <table className="table custom-table">
                     <thead>
