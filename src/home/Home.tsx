@@ -50,6 +50,7 @@ function Home() {
 
     return (
         <div className='container'>
+            <button className='btn-new-password' onClick={() => navigate("/savepassword")}>Generate Password</button>
             <div className='table-container'>
                 <table className="table custom-table">
                     <thead>
