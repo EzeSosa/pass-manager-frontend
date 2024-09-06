@@ -24,7 +24,7 @@ function Home() {
 
     useEffect(() => {
         loadPasswords()
-    }, [userId, pageNumber, loadPasswords])
+    }, [loadPasswords])
 
     const handleUpdate = (id: string) => {
         navigate(`/updatepassword/${id}`)
