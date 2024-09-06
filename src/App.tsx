@@ -5,6 +5,7 @@ import Navbar from './navbar/Navbar'
 import UpdatePassword from './forms/UpdatePassword'
 import GeneratePassword from './forms/GeneratePassword'
 import Login from './auth/Login'
+import Signup from './auth/Signup'
 import ProtectedRoute from './utils/ProtectedRoute'
 import { Navigate } from 'react-router-dom'
 
@@ -14,6 +15,7 @@ function MainLayout() {
       <div className="container">
         <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route 
             path="/home" 
             element={<ProtectedRoute element={<Home />} />} 
